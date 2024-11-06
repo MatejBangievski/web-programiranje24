@@ -1,4 +1,4 @@
-package web.servlet;
+package matejbangievski.webaud.web;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet(name = "HelloWorldServlet", urlPatterns = "/hello")
+
 public class HelloWorldServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -14,16 +14,20 @@ import java.io.IOException;
         filterName = "login-filter", //Names the filter as "auth-filter".
         urlPatterns = "/*", //Specifies that this filter applies to all URLs (/*).
         dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD}, //Defines when the filter should apply, here for both REQUEST and FORWARD requests.
-        initParams = @WebInitParam(name = "ignore-path", value = "/login") //Sets initialization parameters for the filter. This example includes an ignore-path parameter that defines the path /login to be ignored by the filter, so users can access the login page without being redirected.
-)
+        initParams = { @WebInitParam(name = "ignore-path", value = "/login"), //Sets initialization parameters for the filter.
+                        @WebInitParam(name = "register-path", value = "/register")
+        })
+
 public class LoginFilter implements Filter {
 
     private String ignorePath;
+    private String registerPath;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         Filter.super.init(filterConfig);
         ignorePath = filterConfig.getInitParameter("ignore-path");
+        registerPath = filterConfig.getInitParameter("register-path");
     }
 
     @Override
@@ -36,11 +40,11 @@ public class LoginFilter implements Filter {
         //Patekata na koja e korisnikot
         String path = req.getServletPath();
 
-        if (ignorePath.startsWith(path) || user != null) {
-            // If the user is logged in or the requested path is the login page, continue with the request
+        if (path.startsWith(ignorePath) || path.startsWith(registerPath) || user != null) {
+            // Allow access if the path is login or register or if the user is logged in
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
-            // If the user is not logged in and the requested path is not the login page, redirect to the login page
+            // Redirect to login page if user is not logged in and trying to access restricted pages
             resp.sendRedirect("/login");
         }
     }

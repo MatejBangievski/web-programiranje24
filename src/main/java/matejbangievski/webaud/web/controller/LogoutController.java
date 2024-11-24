@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 public class LogoutController {
 
     @GetMapping
-    public String logout(HttpServletRequest request, Model model) {
+    public String logout(HttpServletRequest request, Model model) { //Valjda ne ti ni treba model ovde
         request.getSession().invalidate();
         return "redirect:/login";
     }

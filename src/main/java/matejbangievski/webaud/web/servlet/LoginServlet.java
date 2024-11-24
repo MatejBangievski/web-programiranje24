@@ -1,4 +1,4 @@
-package matejbangievski.webaud.web;
+package matejbangievski.webaud.web.servlet;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

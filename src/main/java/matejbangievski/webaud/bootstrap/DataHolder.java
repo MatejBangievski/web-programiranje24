@@ -1,10 +1,7 @@
 package matejbangievski.webaud.bootstrap;
 
 import jakarta.annotation.PostConstruct;
-import matejbangievski.webaud.model.Category;
-import matejbangievski.webaud.model.Manufacturer;
-import matejbangievski.webaud.model.Product;
-import matejbangievski.webaud.model.User;
+import matejbangievski.webaud.model.*;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -17,7 +14,7 @@ public class DataHolder {
     public static List<Manufacturer> manufacturers = null; //static ne zaboravaj
     public static List<Product> products = null; //static ne zaboravaj
     public static List<User> users = null;
-
+    public static List<ShoppingCart> shoppingCarts = null;
     //On application startup, initialize the categories list
     //On each startup, the list will be initialized with the same values and the previous values will be lost
     @PostConstruct
@@ -40,5 +37,7 @@ public class DataHolder {
         products.add(new Product("Nike Air Max", 100.0, 10, categories.get(0), manufacturers.get(0)));
         products.add(new Product("Coca Cola 2L", 2.0, 100, categories.get(1), manufacturers.get(1)));
         products.add(new Product("Java Programming", 100.0, 10, categories.get(2), manufacturers.get(2)));
+
+        shoppingCarts = new ArrayList<>();
     }
 }

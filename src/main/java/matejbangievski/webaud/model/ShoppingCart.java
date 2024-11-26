@@ -1,5 +1,6 @@
 package matejbangievski.webaud.model;
 
+import jakarta.persistence.*;
 import lombok.Data;
 import matejbangievski.webaud.model.enumerations.ShoppingCartStatus;
 
@@ -8,11 +9,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Entity
 public class ShoppingCart {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private LocalDateTime dateCreated;
+
+    @ManyToOne
     private User user;
+
+    @ManyToMany
     private List<Product> products;
+
+    @Enumerated(EnumType.STRING)
     private ShoppingCartStatus status;
 
     public ShoppingCart() {
